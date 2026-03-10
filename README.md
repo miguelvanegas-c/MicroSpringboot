@@ -54,6 +54,18 @@ This project is the development of a Java Web server as part of an academic work
 > 4. ![img_5.png](img_5.png)
 >     - It scans the directory recursively until it finds files; upon finding them it formats the URI to create the path of a class and load it with the loadClass method.
 
+## AWS Deployment
+1. The EC2 instance is created in AWS.
+2. Open the port through which the server will operate, which is 8080, go to security, and create an outbound rule on the corresponding port with TCP.
+- ![img_6.png](img_6.png)
+3. Now we connect to the server via ssh, using the secret key created when the instance was launched.
+4. We also connect to the server via sftp to transfer the compiled files for the application.
+- ![img_7.png](img_7.png)
+5. Once inside, we start the application with the command at the beginning of the readme and enter the application with the application's public DNS and the respective port.
+- ![img_8.png](img_8.png)
+6. Finally, we tested the application.
+- ![img_9.png](img_9.png)
+- ![img_10.png](img_10.png)
 ## Team members
 - Miguel Angel Vanegas Cardenas.
 
