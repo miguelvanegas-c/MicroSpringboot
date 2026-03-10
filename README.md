@@ -4,9 +4,6 @@ Este proyecto es el desarrollo de un servidor Web en Java como parte de un talle
 
 ## Objetivos del Taller
 
-- **Construcción de un servidor Web**: Desarrollar un servidor capaz de:
-  - Entregar páginas HTML.
-  - Servir imágenes tipo PNG.
 - **Framework IoC**: Incluir un framework de inversión de control para permitir la construcción de aplicaciones Web a partir de POJOS (Plain Old Java Objects).
 - **Aplicación de ejemplo**: Crear una aplicación web de ejemplo utilizando el servidor.
 - **Manejo de solicitudes**: Habilitar el manejo de múltiples solicitudes no concurrentes.
