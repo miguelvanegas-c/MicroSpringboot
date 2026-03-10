@@ -1,61 +1,60 @@
 # MicroSpringboot
 
-Este proyecto es el desarrollo de un servidor Web en Java como parte de un taller académico. A continuación, se describen los objetivos y características principales del proyecto, así como los pasos para el despliegue en AWS en una instancia EC2.
+This project is the development of a Java Web server as part of an academic workshop. Below, the objectives and main characteristics of the project are described, as well as the steps for deployment on AWS on an EC2 instance.
 
-## Que necesita para funcionar??
-### Dependencias
+## What does it need to run??
+### Dependencies
 > - Java 21
 > - mvn 3.3.0
-### Como correrlo
-- Primero compilar el proyecto usando
+### How to run it
+- First compile the project using
 ```bash
    mvn clean install
 ```
-- Despues desde la raiz del proyecto, correr el siguiente comando:
+- Then from the project root, run the following command:
 ```bash
    java -cp target/classes co.edu.escuelaing.MicroSpringBoot
 ```
-## Objetivos del Taller
+## Workshop Objectives
 
-- **Framework IoC**: Incluir un framework de inversión de control para permitir la construcción de aplicaciones Web a partir de POJOS (Plain Old Java Objects).
-- **Aplicación de ejemplo**: Crear una aplicación web de ejemplo utilizando el servidor.
-- **Manejo de solicitudes**: Habilitar el manejo de múltiples solicitudes no concurrentes.
-- **Prototipo mínimo**: Demostrar las capacidades reflexivas de Java permitiendo cargar un bean (POJO) y derivar una aplicación web a partir de él.
+- **IoC Framework**: Include an inversion of control framework to allow the construction of Web applications from POJOS (Plain Old Java Objects).
+- **Example application**: Create a sample web application using the server.
+- **Request handling**: Enable the handling of multiple non-concurrent requests.
+- **Minimal prototype**: Demonstrate Java's reflective capabilities by allowing to load a bean (POJO) and derive a web application from it.
 
-## Descripcion del proyecto
-### Anotaciones
-- Se crearon las anotaciones GetMapping, RequestParam y RestController
+## Project description
+### Annotations
+- The annotations GetMapping, RequestParam and RestController were created
 ![img.png](img.png)
-- Se declaro una clase como @interface.
-- Se uso @Retention para que la anotacion se mantenga mientras el programa esta en ejecucion.
-- Se uso @Target para saber que elemento va a marcar la anotacion.
-- Se definieron en los casos necesarios, valores y en un caso un valor default en caso de no encontrar el otro valor.
+- A class was declared as @interface.
+- @Retention was used so that the annotation is maintained while the program is running.
+- @Target was used to know which element the annotation will mark.
+- Values were defined where necessary, and in one case a default value was defined in case the other value is not found.
 
 ### Controllers (POJO)
-- Se crearon los siguientes controladores.
+- The following controllers were created.
 ![img_1.png](img_1.png)
-- Se marcaron los controladores con las anotaciones @RestController
-- Se marcaron los metodos con la anotacion @GetMapping y un valor interno que define la ruta.
-- Se marco un parametro con @RequestParam para obtener el valor de dicho parametro y declarar un valor default en caso de encontrarlo.
+- Controllers were marked with the @RestController annotations
+- Methods were marked with the @GetMapping annotation and an internal value that defines the route.
+- A parameter was marked with @RequestParam to obtain the value of that parameter and declare a default value in case it is not found.
 
 ### HttpServer
-- El guarda rutas, con sus respectivos metodos e instancias de los se marcaron con las etiquetas @RestController y @Getmapping
-- Esta clase crea la conexion con el browser que quiera hacer una solicitud.
-- Este recibe solicitudes extrae parametro y ejecuta los metodos correspondientes.
-- Registra metodos e instancias de los controladores.
+- It stores routes, with their respective methods and instances of those marked with the @RestController and @GetMapping labels
+- This class creates the connection with the browser that wants to make a request.
+- It receives requests, extracts parameters and executes the corresponding methods.
+- It registers methods and instances of the controllers.
 ### MicroSpringBoot
-- Aca se inicia el servicio de nuestro Micro SpringBoot y realiza las operaciones necesarias para la IoC
+- Here the service of our Micro SpringBoot is started and the necessary operations for IoC are performed
 > 1. ![img_2.png](img_2.png)
->     - En el metodo main inicia el servidor http y sigue dos caminos, en caso de que se halla especificado un controlador, lo carga directamente, en caso de que no escanea el classPath.
+>     - In the main method it starts the http server and follows two paths: in case a controller has been specified, it loads it directly; if not, it scans the classPath.
 > 2. ![img_3.png](img_3.png)
->     - Este carga un controlador, verificando que la clase especificada contenga la anotacion RestController, creando una instancia de este y recorriendo sus metodos buscando la anotacion de getMapping, al encontrarlo obtiene el valor de la ruta y lo regista en el server.
+>     - This loads a controller, verifying that the specified class contains the RestController annotation, creating an instance of it and iterating over its methods looking for the getMapping annotation; upon finding it, it obtains the route value and registers it in the server.
 > 3. ![img_4.png](img_4.png)
->     - El metodo escanea el classpath por completo, al ingresar valida si es un directorio y en caso de serlo comienza su escaneo.
+>     - The method scans the classpath entirely; when entering it validates if it is a directory and if so begins its scan.
 > 4. ![img_5.png](img_5.png)
->     - Escanea el directorio de forma recursiva hasta encontrar archivos, al encontrarlos formatra la URI para crear el path de una clase y cargarla con el metodo loadClass.
+>     - It scans the directory recursively until it finds files; upon finding them it formats the URI to create the path of a class and load it with the loadClass method.
 
-## Integrantes del equipo
+## Team members
 - Miguel Angel Vanegas Cardenas.
 
-Si deseas contribuir o usar este proyecto como base para tus exploraciones en IoC en Java, sigue las instrucciones descritas para construir y desplegar tu aplicación en una instancia EC2 de AWS. ¡Disfruta explorando y aprendiendo!
-
+If you want to contribute or use this project as a base for your explorations in IoC in Java, follow the instructions described to build and deploy your application on an AWS EC2 instance. Enjoy exploring and learning!
