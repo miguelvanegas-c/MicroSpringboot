@@ -25,7 +25,7 @@ This project is the development of a Java Web server as part of an academic work
 ## Project description
 ### Annotations
 - The annotations GetMapping, RequestParam and RestController were created
-![img.png](img.png)
+![img.png](imgs/img.png)
 - A class was declared as @interface.
 - @Retention was used so that the annotation is maintained while the program is running.
 - @Target was used to know which element the annotation will mark.
@@ -33,7 +33,7 @@ This project is the development of a Java Web server as part of an academic work
 
 ### Controllers (POJO)
 - The following controllers were created.
-![img_1.png](img_1.png)
+![img_1.png](imgs/img_1.png)
 - Controllers were marked with the @RestController annotations
 - Methods were marked with the @GetMapping annotation and an internal value that defines the route.
 - A parameter was marked with @RequestParam to obtain the value of that parameter and declare a default value in case it is not found.
@@ -45,27 +45,27 @@ This project is the development of a Java Web server as part of an academic work
 - It registers methods and instances of the controllers.
 ### MicroSpringBoot
 - Here the service of our Micro SpringBoot is started and the necessary operations for IoC are performed
-> 1. ![img_2.png](img_2.png)
+> 1. ![img_2.png](imgs/img_2.png)
 >     - In the main method it starts the http server and follows two paths: in case a controller has been specified, it loads it directly; if not, it scans the classPath.
-> 2. ![img_3.png](img_3.png)
+> 2. ![img_3.png](imgs/img_3.png)
 >     - This loads a controller, verifying that the specified class contains the RestController annotation, creating an instance of it and iterating over its methods looking for the getMapping annotation; upon finding it, it obtains the route value and registers it in the server.
-> 3. ![img_4.png](img_4.png)
+> 3. ![img_4.png](imgs/img_4.png)
 >     - The method scans the classpath entirely; when entering it validates if it is a directory and if so begins its scan.
-> 4. ![img_5.png](img_5.png)
+> 4. ![img_5.png](imgs/img_5.png)
 >     - It scans the directory recursively until it finds files; upon finding them it formats the URI to create the path of a class and load it with the loadClass method.
 
 ## AWS Deployment
 1. The EC2 instance is created in AWS.
 2. Open the port through which the server will operate, which is 8080, go to security, and create an outbound rule on the corresponding port with TCP.
-- ![img_6.png](img_6.png)
+- ![img_6.png](imgs/img_6.png)
 3. Now we connect to the server via ssh, using the secret key created when the instance was launched.
 4. We also connect to the server via sftp to transfer the compiled files for the application.
-- ![img_7.png](img_7.png)
+- ![img_7.png](imgs/img_7.png)
 5. Once inside, we start the application with the command at the beginning of the readme and enter the application with the application's public DNS and the respective port.
-- ![img_8.png](img_8.png)
+- ![img_8.png](imgs/img_8.png)
 6. Finally, we tested the application.
-- ![img_9.png](img_9.png)
-- ![img_10.png](img_10.png)
+- ![img_9.png](imgs/img_9.png)
+- ![img_10.png](imgs/img_10.png)
 ## Team members
 - Miguel Angel Vanegas Cardenas.
 
