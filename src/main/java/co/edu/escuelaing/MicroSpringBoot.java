@@ -10,7 +10,7 @@ import co.edu.escuelaing.server.HttpServer;
 public class MicroSpringBoot {
 
     public static void main(String[] args) throws Exception {
-        HttpServer servidor = new HttpServer(8080);
+        HttpServer servidor = new HttpServer(6000);
 
         if (args.length > 0) {
             loadClass(args[0], servidor);

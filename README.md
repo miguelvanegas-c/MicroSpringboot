@@ -43,6 +43,7 @@ This project is the development of a Java Web server as part of an academic work
 - This class creates the connection with the browser that wants to make a request.
 - It receives requests, extracts parameters and executes the corresponding methods.
 - It registers methods and instances of the controllers.
+- - It search static files if the route is not register.
 ### MicroSpringBoot
 - Here the service of our Micro SpringBoot is started and the necessary operations for IoC are performed
 > 1. ![img_2.png](imgs/img_2.png)
@@ -55,6 +56,7 @@ This project is the development of a Java Web server as part of an academic work
 >     - It scans the directory recursively until it finds files; upon finding them it formats the URI to create the path of a class and load it with the loadClass method.
 
 ## AWS Deployment
+### EC2 with java 
 1. The EC2 instance is created in AWS.
 2. Open the port through which the server will operate, which is 8080, go to security, and create an outbound rule on the corresponding port with TCP.
 - ![img_6.png](imgs/img_6.png)
@@ -66,6 +68,51 @@ This project is the development of a Java Web server as part of an academic work
 6. Finally, we tested the application.
 - ![img_9.png](imgs/img_9.png)
 - ![img_10.png](imgs/img_10.png)
+- ![img_11.png](imgs/img_11.png)
+### EC2 with docker
+1. Identify a command to compile and run the project, in this case is 
+```bash 
+  mvn clean install 
+  java -cp "target/classes:target/dependency/*" co.edu.escuelaing.sparkdockerdemolive.RestServiceApplication
+```
+2. Create dockerFile
+- ![img.png](imgs/img_12.png)
+3. Create docker-compose
+- ![img.png](imgs/img_13.png)
+4. Execute docker-compose and valide the process is running.
+```bash 
+  docker-compose up -d
+```
+- ![img.png](imgs/img_14.png)
+5. Create repository on dockerhub
+- ![img.png](imgs/img_15.png)
+6. Create tag on local machine
+```bash
+  docker tag microspringboot-app miguelvanegasc23/microspringboot
+```
+7. Once in the EC2 instance, we log in via SSH, grant permissions to the key, and then log in to the machine
+- ![img.png](imgs/img_16.png)
+8. Install docker with:
+```bash 
+  sudo yum update -y
+  sudo yum install docker
+```
+9. Start the service
+- ![img.png](imgs/img_17.png)
+10. Configure the user in docker group.
+```bash 
+  sudo usermod -a -G docker ec2-user
+```
+11. Restart the EC2 instance.
+12. Finally, using the image from the repository, a container is created on the machine with an outgoing connection on port 42000 of the EC2 instance
+```bash 
+   docker run -d -p 42000:6000 --name microspringboot miguelvanegasc23/microspringboot
+```
+13. Confirm it is running.
+- ![img.png](imgs/img_18.png)
+
+**Note:** The EC2 instance must allow TCP traffic through port 42000, which was used in this case.
+
 ## Team members
 - Miguel Angel Vanegas Cardenas.
 

@@ -108,7 +108,7 @@ public class HttpServer {
         writer.flush();
     }
     private void serveStaticFile(PrintWriter writer, Socket clientSocket, String filePath) throws IOException {
-        File file = new File("src/main/resources/static" + filePath);
+        File file = new File("classes/static" + filePath);
 
         if (!file.exists()) {
             sendResponse(writer, 404, "<h1>404 - Not Found</h1>");
