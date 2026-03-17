@@ -54,7 +54,9 @@ This project is the development of a Java Web server as part of an academic work
 >     - The method scans the classpath entirely; when entering it validates if it is a directory and if so begins its scan.
 > 4. ![img_5.png](imgs/img_5.png)
 >     - It scans the directory recursively until it finds files; upon finding them it formats the URI to create the path of a class and load it with the loadClass method.
-
+### Concurrent server
+- To make the server concurrent, we handle each connection to the server in a separate thread; we create a thread pool and establish the connection in separate threads, so that the server can handle multiple clients at the same time.
+- ![img.png](imgs/img_19.png)
 ## AWS Deployment
 ### EC2 with java 
 1. The EC2 instance is created in AWS.
