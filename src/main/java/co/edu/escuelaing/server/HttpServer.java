@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 
 import co.edu.escuelaing.annotations.RequestParam;
 
+
 public class HttpServer {
     private final int serverPort;
     private final Map<String, Method> routeMap = new HashMap<>();
@@ -58,7 +59,9 @@ public class HttpServer {
 
         String endpoint = fullEndpoint.contains("?") ? fullEndpoint.split("\\?")[0] : fullEndpoint;
         String queryString = fullEndpoint.contains("?") ? fullEndpoint.split("\\?")[1] : "";
-
+        if(endpoint.equals("/close")) {
+            System.exit(0);
+        }
         if (routeMap.containsKey(endpoint)) {
             Method methodRef = routeMap.get(endpoint);
             Object controllerInstance = controllerMap.get(endpoint);

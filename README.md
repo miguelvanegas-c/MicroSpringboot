@@ -57,6 +57,9 @@ This project is the development of a Java Web server as part of an academic work
 ### Concurrent server
 - To make the server concurrent, we handle each connection to the server in a separate thread; we create a thread pool and establish the connection in separate threads, so that the server can handle multiple clients at the same time.
 - ![img.png](imgs/img_19.png)
+### Elegant close
+- When the route is close, the application too close.
+![img_20.png](imgs/img_20.png)
 ## AWS Deployment
 ### EC2 with java 
 1. The EC2 instance is created in AWS.
