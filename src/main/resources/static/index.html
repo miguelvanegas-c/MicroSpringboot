@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Static Server</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+  <div class="grain"></div>
+
+  <header>
+    <span class="badge">HTTP SERVER</span>
+    <h1>Imagenes Paginas<br/><em>WEB</em></h1>
+    <p class="sub">Java · Reflection · Anotaciones</p>
+  </header>
+
+  <main>
+    <div class="card" id="card-html">
+      <span class="tag">01</span>
+      <h2>HTML</h2>
+      <img src="/img.png" width="200" height="200" />
+      <p></p>
+    </div>
+
+    <div class="card" id="card-css">
+      <span class="tag">02</span>
+      <h2>CSS</h2>
+      <img src="/img_1.png" width="300" height="200" />
+    </div>
+
+    <div class="card" id="card-js">
+      <span class="tag">03</span>
+      <h2>JavaScript</h2>
+      <img src="/img_2.png" width="200" height="200" />
+    </div>
+    <div class="card" id="card-status">
+      <span class="tag">04</span>
+      <h2>Ejecutar JS</h2>
+      <p id="status-text">Presiona el botón...</p>
+      <!-- Agrega esto -->
+      <button id="btn-test">Probar JS</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>EscuelaIng · <span id="time"></span></p>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

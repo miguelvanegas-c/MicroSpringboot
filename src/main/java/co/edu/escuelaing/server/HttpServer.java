@@ -1,15 +1,15 @@
 package co.edu.escuelaing.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import co.edu.escuelaing.annotations.RequestParam;
 
@@ -28,10 +28,17 @@ public class HttpServer {
     public void start() throws IOException {
         ServerSocket socketServidor = new ServerSocket(serverPort);
         System.out.println("Server running on http://localhost:" + serverPort);
+        ExecutorService pool = Executors.newFixedThreadPool(10);
 
         while (true) {
             Socket cliente = socketServidor.accept();
-            handleRequest(cliente);
+            pool.submit(() -> {
+                try {
+                    handleRequest(cliente);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
         }
     }
 
@@ -62,7 +69,7 @@ public class HttpServer {
                 sendResponse(writer, 500, "Error: " + e.getMessage());
             }
         } else {
-            sendResponse(writer, 404, "<h1>404 - Not Found</h1>");
+            serveStaticFile(writer, clientSocket, endpoint);
         }
         clientSocket.close();
     }
@@ -99,5 +106,34 @@ public class HttpServer {
         writer.println();
         writer.println(body);
         writer.flush();
+    }
+    private void serveStaticFile(PrintWriter writer, Socket clientSocket, String filePath) throws IOException {
+        File file = new File("src/main/resources/static" + filePath);
+
+        if (!file.exists()) {
+            sendResponse(writer, 404, "<h1>404 - Not Found</h1>");
+            return;
+        }
+
+        String contentType = switch (filePath.substring(filePath.lastIndexOf("."))) {
+            case ".html" -> "text/html";
+            case ".js"   -> "application/javascript";
+            case ".css"  -> "text/css";
+            case ".png"  -> "image/png";
+            default      -> "application/octet-stream";
+        };
+
+        byte[] fileBytes = Files.readAllBytes(file.toPath());
+
+        OutputStream out = clientSocket.getOutputStream();
+        PrintWriter headerWriter = new PrintWriter(out);
+        headerWriter.print("HTTP/1.1 200 OK\r\n");
+        headerWriter.print("Content-Type: " + contentType + "\r\n");
+        headerWriter.print("Content-Length: " + fileBytes.length + "\r\n");
+        headerWriter.print("Connection: close\r\n");
+        headerWriter.print("\r\n");
+        headerWriter.flush();
+        out.write(fileBytes);
+        out.flush();
     }
 }
